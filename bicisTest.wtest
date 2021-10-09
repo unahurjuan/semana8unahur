@@ -1,0 +1,42 @@
+import bicicletas.*
+import accesorios.*
+
+describe "testBicicletas"
+{
+	const can1 = new Canastos(volumen = 8)
+	const mor1 = new MorralDeLaBici(largo = 21, ojoDeGato = true)
+	const mor2 = new MorralDeLaBici(largo = 6,  ojoDeGato = false)
+	const b1   = new Bicicleta(rodado = 28, largo = 150, marca = "Olmo",    accesorios = #{farolito})
+	const b2   = new Bicicleta(rodado = 26, largo = 110, marca = "Legnano", accesorios = #{farolito, can1, mor1})
+	const b3   = new Bicicleta(rodado = 20, largo = 90,  marca = "Legnano", accesorios = #{mor2})
+	
+	test "b1"
+	{
+		assert.that( b1.altura()                       == 85   )
+		assert.that( b1.velocidadDeCrucero()           == 34   )
+		assert.that( b1.carga()                        == 0    )
+		assert.that( b1.peso()                         == 14.5 )
+		assert.that( b1.tieneLuz()                             ) 
+		assert.that( b1.cantidadDeAccesoriosLivianos() == 1    )
+	}
+	
+	test "b2"
+	{
+	    assert.that( b2.altura()                       == 80   )
+	    assert.that( b2.velocidadDeCrucero()           == 28   )
+	    assert.that( b2.carga()                        == 23   )
+	    assert.that( b2.peso()                         == 15.5 )
+	    assert.that( b2.tieneLuz()                             )
+	    assert.that( b2.cantidadDeAccesoriosLivianos() == 2    )
+	}
+	
+	test "b3"
+	{
+	    assert.that( b3.altura()                       == 65   )
+	    assert.that( b3.velocidadDeCrucero()           == 22   )
+	    assert.that( b3.carga()                        == 2    )
+	    assert.that( b3.peso()                         == 11.2 )
+	    assert.that( !b3.tieneLuz()                            )
+	    assert.that( b3.cantidadDeAccesoriosLivianos() == 0    )
+	}
+}

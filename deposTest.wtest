@@ -1,0 +1,22 @@
+import bicicletas.*
+import accesorios.*
+import depositos.*
+
+describe "testDepositos"
+{
+	const can1 = new Canastos(volumen = 8)
+	const mor1 = new MorralDeLaBici(largo = 21, ojoDeGato = true)
+	const mor2 = new MorralDeLaBici(largo = 6,  ojoDeGato = false)
+	const b1   = new Bicicleta(rodado = 28, largo = 150, marca = "Olmo",    accesorios = #{farolito})
+	const b2   = new Bicicleta(rodado = 26, largo = 110, marca = "Legnano", accesorios = #{farolito, can1, mor1})
+	const b3   = new Bicicleta(rodado = 20, largo = 90,  marca = "Legnano", accesorios = #{mor2})
+	const d1   = new Deposito(bicis = #{b1, b2, b3})
+	
+	test "d1"
+	{
+		assert.that( d1.bicisRapidas() == #{b1, b2}                                  )
+		assert.that( d1.marcasBicis()  == #{"Olmo", "Legnano"}                       )
+		assert.that( !d1.esNocturno()                                                )
+		assert.that( d1.hayBiciParaLLevarCarga(10) && !d1.hayBiciParaLLevarCarga(50) )
+	}
+}
